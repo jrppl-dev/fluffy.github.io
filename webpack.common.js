@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'docs'),
     clean: true,
     filename: 'js/[name].[contenthash].js',
-    publicPath: './',
+    publicPath: 'auto',
   },
   module: {
     rules: [
@@ -27,6 +27,19 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'img', to: 'img', noErrorOnMissing: true },
+        { from: 'css', to: 'css', noErrorOnMissing: true, filter: (resourcePath) => !resourcePath.endsWith('style.css') },
+        { from: 'js/vendor', to: 'js/vendor', noErrorOnMissing: true },
+        { from: 'icon.svg', to: 'icon.svg' },
+        { from: 'favicon.ico', to: 'favicon.ico' },
+        { from: 'robots.txt', to: 'robots.txt' },
+        { from: 'icon.png', to: 'icon.png' },
+        { from: '404.html', to: '404.html' },
+        { from: 'site.webmanifest', to: 'site.webmanifest' },
+      ],
     }),
   ],
 };
