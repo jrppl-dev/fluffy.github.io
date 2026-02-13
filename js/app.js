@@ -9,9 +9,13 @@ const moveButton = () => {
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
   const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
   
-  noBtn.style.position = 'absolute';
-  noBtn.style.left = `${x}px`;
-  noBtn.style.top = `${y}px`;
+  // Ensure the button stays within the viewport
+  const safeX = Math.max(0, Math.min(x, window.innerWidth - noBtn.offsetWidth));
+  const safeY = Math.max(0, Math.min(y, window.innerHeight - noBtn.offsetHeight));
+
+  noBtn.style.position = 'fixed'; // Use fixed to ensure it's relative to viewport
+  noBtn.style.left = `${safeX}px`;
+  noBtn.style.top = `${safeY}px`;
 };
 
 noBtn.addEventListener('mouseover', moveButton);

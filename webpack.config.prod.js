@@ -7,9 +7,9 @@ module.exports = merge(common, {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'img', to: 'img' },
-        { from: 'css', to: 'css' },
-        { from: 'js/vendor', to: 'js/vendor' },
+        { from: 'img', to: 'img', noErrorOnMissing: true },
+        { from: 'css', to: 'css', noErrorOnMissing: true, filter: (resourcePath) => !resourcePath.endsWith('style.css') },
+        { from: 'js/vendor', to: 'js/vendor', noErrorOnMissing: true },
         { from: 'icon.svg', to: 'icon.svg' },
         { from: 'favicon.ico', to: 'favicon.ico' },
         { from: 'robots.txt', to: 'robots.txt' },
