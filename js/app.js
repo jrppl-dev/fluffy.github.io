@@ -1,3 +1,5 @@
+import '../css/style.css';
+
 const yesBtn = document.getElementById('yes-btn');
 const noBtn = document.getElementById('no-btn');
 const valentineCard = document.getElementById('valentine-card');
