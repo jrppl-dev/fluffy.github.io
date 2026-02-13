@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'docs'),
     clean: true,
     filename: 'js/[name].[contenthash].js',
-    publicPath: 'auto',
+    publicPath: './',
   },
   module: {
     rules: [
@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: 'index.html',
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
