@@ -10,8 +10,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'docs'),
     clean: true,
-    filename: 'js/[name].[contenthash].js',
-    publicPath: 'auto',
+    filename: 'js/app.js',
+    publicPath: './',
   },
   module: {
     rules: [
@@ -26,7 +26,7 @@ module.exports = {
       template: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
+      filename: 'css/style.css',
     }),
     new CopyPlugin({
       patterns: [
