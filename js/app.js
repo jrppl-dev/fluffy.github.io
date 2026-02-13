@@ -1,31 +1,41 @@
 import '../css/style.css';
 
-const yesBtn = document.getElementById('yes-btn');
-const noBtn = document.getElementById('no-btn');
-const valentineCard = document.getElementById('valentine-card');
-const celebration = document.getElementById('celebration');
+const init = () => {
+  const yesBtn = document.getElementById('yes-btn');
+  const noBtn = document.getElementById('no-btn');
+  const valentineCard = document.getElementById('valentine-card');
+  const celebration = document.getElementById('celebration');
 
-const moveButton = () => {
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-  
-  // Ensure the button stays within the viewport
-  const safeX = Math.max(0, Math.min(x, window.innerWidth - noBtn.offsetWidth));
-  const safeY = Math.max(0, Math.min(y, window.innerHeight - noBtn.offsetHeight));
+  if (!yesBtn || !noBtn || !valentineCard || !celebration) return;
 
-  noBtn.style.position = 'fixed'; // Use fixed to ensure it's relative to viewport
-  noBtn.style.left = `${safeX}px`;
-  noBtn.style.top = `${safeY}px`;
+  const moveButton = () => {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    
+    // Ensure the button stays within the viewport
+    const safeX = Math.max(0, Math.min(x, window.innerWidth - noBtn.offsetWidth));
+    const safeY = Math.max(0, Math.min(y, window.innerHeight - noBtn.offsetHeight));
+
+    noBtn.style.position = 'fixed'; // Use fixed to ensure it's relative to viewport
+    noBtn.style.left = `${safeX}px`;
+    noBtn.style.top = `${safeY}px`;
+  };
+
+  noBtn.addEventListener('mouseover', moveButton);
+  noBtn.addEventListener('click', moveButton);
+
+  yesBtn.addEventListener('click', () => {
+    valentineCard.classList.add('hidden');
+    celebration.classList.remove('hidden');
+    startConfetti();
+  });
 };
 
-noBtn.addEventListener('mouseover', moveButton);
-noBtn.addEventListener('click', moveButton);
-
-yesBtn.addEventListener('click', () => {
-  valentineCard.classList.add('hidden');
-  celebration.classList.remove('hidden');
-  startConfetti();
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 function startConfetti() {
   for (let i = 0; i < 100; i++) {
